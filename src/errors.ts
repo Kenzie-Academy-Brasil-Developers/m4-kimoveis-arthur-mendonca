@@ -10,7 +10,7 @@ class AppError extends Error {
   }
 }
 
-const handleErrors = (
+const handleErrors = async(
   err: Error,
   req: Request,
   res: Response,

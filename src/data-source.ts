@@ -32,4 +32,4 @@ const settings = (): DataSourceOptions => {
 
 const AppDataSource = new DataSource(settings());
 
-export default AppDataSource;
+export { AppDataSource };

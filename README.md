@@ -1,5 +1,11 @@
 https://kenzie-content.vercel.app/clh68uu3007p90bm1lfsnb9f7#
 
+npm run typeorm migration:generate ./src/migrations/InitialMigration -- -d ./src/data-source.ts
+
+npm run typeorm migration:run -- -d ./src/data-source
+
+https://kenzie-content.vercel.app/clfu0o6f5fyn70blxl6cy8p0p#
+
 # Projeto Final: KImóveis - TypeORM com Relacionamentos
 
 ## Introdução
