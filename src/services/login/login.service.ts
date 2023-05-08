@@ -2,10 +2,10 @@ import "dotenv/config";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { Repository } from "typeorm";
-import { User } from "../entities";
-import { AppDataSource } from "../data-source";
-import { TLoginData } from "../controllers/login.controllers";
-import { AppError } from "../errors";
+import { User } from "../../entities";
+import { AppDataSource } from "../../data-source";
+import { TLoginData } from "../../controllers/login.controllers";
+import { AppError } from "../../errors";
 
 const loginUserService = async (loginData: TLoginData): Promise<string> => {
   const useRepo: Repository<User> = AppDataSource.getRepository(User);
@@ -27,10 +27,14 @@ const loginUserService = async (loginData: TLoginData): Promise<string> => {
     throw new AppError("Invalid credentials", 401);
   }
 
-  const token = sign({ email: loginData.email }, process.env.SECRET_KEY!, {
-    expiresIn: "24h",
-    subject: String(getUserData.id),
-  });
+  const token = sign(
+    { email: loginData.email, admin: getUserData.admin },
+    process.env.SECRET_KEY!,
+    {
+      expiresIn: "24h",
+      subject: String(getUserData.id),
+    }
+  );
 
   return token;
 };

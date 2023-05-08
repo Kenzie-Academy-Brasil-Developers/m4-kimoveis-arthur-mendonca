@@ -11,10 +11,9 @@ const verifyTokenMiddleware = async (
   next: NextFunction
 ): Promise<Response | void> => {
   let token = request.headers.authorization;
-  let userId: number = 0;
 
   if (!token) {
-    return response.status(401).json({ message: "Missing bearer token" });
+    throw new AppError("Missing bearer token", 401);
   }
 
   token = token.split(" ")[1];
@@ -23,28 +22,32 @@ const verifyTokenMiddleware = async (
     if (err) {
       throw new AppError(err.message, 401);
     }
-
-    userId = decoded.sub;
+    response.locals.admin = decoded.admin;
+    response.locals.id = decoded.sub;
   });
 
   const userRepo: Repository<User> = AppDataSource.getRepository(User);
 
   const getLoggedUser = await userRepo.findOneBy({
-    id: userId,
+    id: response.locals.id,
   });
 
-  if (!getLoggedUser) {
-    throw new AppError("invalid signature", 401);
-  }
+  // if (!getLoggedUser) {
+  //   throw new AppError("invalid signature", 401);
+  // }
 
-  const admin = getLoggedUser.admin;
-  response.locals.admin = admin;
+  // const admin = getLoggedUser!.admin;
+  // response.locals.admin = admin;
 
-  const IdNumberFromUser = getLoggedUser.id;
+  const IdNumberFromUser = getLoggedUser!.id;
   response.locals.id = IdNumberFromUser;
 
-  const activeUser = getLoggedUser.deletedAt;
-  response.locals.activeUser = activeUser;
+  // Se eu retirar as linhas 39,40, 42 e 43, os testes de UPDATE abaixo não passam. Por quê?
+  // Success: User must be able to self update - User token - Full body (102 ms)
+  // × Success: User must not be able to update 'admin' field - Admin token - Partial (16 ms)
+
+  // const activeUser = getLoggedUser.deletedAt;
+  // response.locals.activeUser = activeUser;
 
   return next();
 };

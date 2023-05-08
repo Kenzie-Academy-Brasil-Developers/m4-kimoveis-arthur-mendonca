@@ -30,13 +30,13 @@ class User {
   @Column({ type: "varchar", length: 120 })
   password: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: "date" })
   createdAt: string | Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ type: "date" })
   updatedAt: string | Date;
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({ type: "date" })
   deletedAt: string | Date;
 
   @OneToMany(() => Schedules, (schedules) => schedules.user)

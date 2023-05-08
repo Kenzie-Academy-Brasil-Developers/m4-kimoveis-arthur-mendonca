@@ -3,6 +3,7 @@ import { TuserCreationDataInterface } from "../interfaces/users.interfaces";
 import { createUserService } from "../services/users/createUser.service";
 import { listAllUsersService } from "../services/users/listAllUsers.service";
 import { updateUserService } from "../services/users/updateUser.service";
+import deleteUserService from "../services/users/deleteUser.service";
 
 const createUserController = async (
   request: Request,
@@ -19,18 +20,12 @@ const listAllUsersController = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
-  const userIsAdmin = response.locals.admin;
-
-  const users = await listAllUsersService(userIsAdmin);
+  const users = await listAllUsersService();
 
   return response.status(200).json(users);
 };
 
-const updateUserController = async (
-  request: Request,
-  response: Response,
-  next: NextFunction
-) => {
+const updateUserController = async (request: Request, response: Response) => {
   const userId = request.params.id;
   const userData = request.body;
   const idFromToken = response.locals.id;
@@ -46,4 +41,21 @@ const updateUserController = async (
   return response.status(200).json(user);
 };
 
-export { createUserController, listAllUsersController, updateUserController };
+const deleteUserController = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
+  const idFromUser = response.locals.id;
+  const userIsAdmin = response.locals.admin;
+
+  const deleteUser = await deleteUserService(idFromUser, userIsAdmin);
+
+  return response.status(204).send();
+};
+
+export {
+  createUserController,
+  listAllUsersController,
+  updateUserController,
+  deleteUserController,
+};

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import loginUserService from "../services/login.service";
+import loginUserService from "../services/login/login.service";
 
 type TLoginData = {
   email: string;

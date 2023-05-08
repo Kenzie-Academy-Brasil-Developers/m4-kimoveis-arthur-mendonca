@@ -3,20 +3,20 @@ import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
 import { AppError } from "../../errors";
 import { TReturnAllUsersResponseSchema } from "../../interfaces/users.interfaces";
-import { returnAllUsersResponseSchema } from "../../schemas/users.schemas";
+import {
+  returnAllUsersResponseSchema,
+  userUpdateResponseShema,
+} from "../../schemas/users.schemas";
 
-const listAllUsersService = async (
-  userIsAdmin: boolean
-): Promise<TReturnAllUsersResponseSchema> => {
-  // FALTOU PASSAR EM UM TESTE - LISTAR TODOS USERS
-  if (!userIsAdmin) {
-    throw new AppError("Insufficient permission", 403);
-  }
-  const userRepo: Repository<User> = AppDataSource.getRepository(User);
+const listAllUsersService =
+  async (): Promise<TReturnAllUsersResponseSchema> => {
+    // FALTOU PASSAR EM UM TESTE - LISTAR TODOS USERS
 
-  const users: TReturnAllUsersResponseSchema = await userRepo.find();
+    const userRepo: Repository<User> = AppDataSource.getRepository(User);
 
-  return returnAllUsersResponseSchema.parse(users);
-};
+    const users: User[] = await userRepo.find();
+
+    return userUpdateResponseShema.parse(users);
+  };
 
 export { listAllUsersService };

@@ -17,17 +17,15 @@ const userCreationResponseSchema = z.object({
   deletedAt: z.string().or(z.date()).nullish(),
 });
 
-const returnAllUsersResponseSchema = z.array(
-  z.object({
-    id: z.number(),
-    name: z.string().max(45),
-    email: z.string().email().max(45),
-    admin: z.boolean().default(false),
-    createdAt: z.string().or(z.date()).nullish(),
-    updatedAt: z.string().or(z.date()).nullish(),
-    deletedAt: z.string().or(z.date()).nullish(),
-  })
-);
+const returnAllUsersResponseSchema = z.object({
+  id: z.number(),
+  name: z.string().max(45),
+  email: z.string().email().max(45),
+  admin: z.boolean().default(false),
+  createdAt: z.string().or(z.date()).nullish(),
+  updatedAt: z.string().or(z.date()).nullish(),
+  deletedAt: z.string().or(z.date()).nullish(),
+});
 
 const userUpdateRequestSchema = userCreationResponseSchema
   .omit({

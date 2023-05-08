@@ -1,6 +1,6 @@
 import { DeepPartial, Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
-import { User } from "../../entities";
+import { User } from "../../entities/index";
 import {
   TUserUpdateRequestSchema,
   TuserCreationResponse,
@@ -14,6 +14,10 @@ const updateUserService = async (
   userData: TUserUpdateRequestSchema,
   userIsAdmin: boolean
 ): Promise<TuserCreationResponse> => {
+  // console.log(idFromRequest);
+  // console.log(idFromToken);
+  // console.log(userIsAdmin);
+
   if (userIsAdmin) {
     const userRepo: Repository<User> = AppDataSource.getRepository(User);
     const currentUser: User | null = await userRepo.findOneBy({
