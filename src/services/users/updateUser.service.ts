@@ -1,45 +1,12 @@
 import { DeepPartial, Repository } from "typeorm";
-import { AppDataSource } from "../data-source";
-import { User } from "../entities";
+import { AppDataSource } from "../../data-source";
+import { User } from "../../entities";
 import {
-  TReturnAllUsersResponseSchema,
   TUserUpdateRequestSchema,
-  TuserCreationDataInterface,
   TuserCreationResponse,
-} from "../interfaces/users.interfaces";
-import {
-  returnAllUsersResponseSchema,
-  userCreationResponseSchema,
-  userUpdateRequestSchema,
-} from "../schemas/users.schemas";
-import { AppError } from "../errors";
-
-const createUserService = async (
-  userData: TuserCreationDataInterface
-): Promise<TuserCreationResponse> => {
-  const userRepo: Repository<User> = AppDataSource.getRepository(User);
-
-  const createUser: User = userRepo.create(userData);
-  await userRepo.save(createUser);
-
-  const parsedUser = userCreationResponseSchema.parse(createUser);
-
-  return parsedUser;
-};
-
-const listAllUsersService = async (
-  userIsAdmin: boolean
-): Promise<TReturnAllUsersResponseSchema> => {
-  // FALTOU PASSAR EM UM TESTE - LISTAR TODOS USERS
-  if (!userIsAdmin) {
-    throw new AppError("Insufficient permission", 403);
-  }
-  const userRepo: Repository<User> = AppDataSource.getRepository(User);
-
-  const users: TReturnAllUsersResponseSchema = await userRepo.find();
-
-  return returnAllUsersResponseSchema.parse(users);
-};
+} from "../../interfaces/users.interfaces";
+import { userCreationResponseSchema } from "../../schemas/users.schemas";
+import { AppError } from "../../errors";
 
 const updateUserService = async (
   idFromRequest: number,
@@ -86,4 +53,4 @@ const updateUserService = async (
   }
 };
 
-export { listAllUsersService, createUserService, updateUserService };
+export { updateUserService };

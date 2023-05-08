@@ -1,11 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { TuserCreationDataInterface } from "../interfaces/users.interfaces";
-import {
-  createUserService,
-  listAllUsersService,
-  updateUserService,
-} from "../services/users.service";
-import { returnAllUsersResponseSchema } from "../schemas/users.schemas";
+import { createUserService } from "../services/users/createUser.service";
+import { listAllUsersService } from "../services/users/listAllUsers.service";
+import { updateUserService } from "../services/users/updateUser.service";
 
 const createUserController = async (
   request: Request,

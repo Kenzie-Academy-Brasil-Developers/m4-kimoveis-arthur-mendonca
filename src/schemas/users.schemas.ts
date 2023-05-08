@@ -11,10 +11,10 @@ const userCreationResponseSchema = z.object({
   id: z.number(),
   name: z.string().max(45),
   email: z.string().email().max(45),
-  admin: z.boolean(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
-  deletedAt: z.date().nullable(),
+  // admin: z.boolean(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  deletedAt: z.string().nullable(),
 });
 
 const returnAllUsersResponseSchema = z.array(
@@ -23,15 +23,19 @@ const returnAllUsersResponseSchema = z.array(
     name: z.string().max(45),
     email: z.string().email().max(45),
     admin: z.boolean(),
-    createdAt: z.date(),
-    updatedAt: z.date(),
-    deletedAt: z.date().nullable(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
+    deletedAt: z.string().nullable(),
   })
 );
 
-const userUpdateRequestSchema = userCreationResponseSchema.omit({
-  admin: true,
-});
+const userUpdateRequestSchema = userCreationResponseSchema
+  .omit({
+    deletedAt: true,
+    createdAt: true,
+    id: true,
+  })
+  .partial();
 
 const userUpdateResponseShema = z.array(returnAllUsersResponseSchema);
 

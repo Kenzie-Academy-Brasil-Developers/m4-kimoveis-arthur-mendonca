@@ -31,13 +31,13 @@ class User {
   password: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt: string | Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt: string | Date;
 
   @DeleteDateColumn()
-  deletedAt: Date;
+  deletedAt: string | Date;
 
   @OneToMany(() => Schedules, (schedules) => schedules.user)
   @JoinColumn()
