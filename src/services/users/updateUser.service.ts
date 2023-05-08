@@ -23,11 +23,10 @@ const updateUserService = async (
       ...currentUser,
       ...(userData as DeepPartial<User>),
     });
+    await userRepo.save(newUserData as DeepPartial<User>);
 
     const returnNewUser: TuserCreationResponse =
       userCreationResponseSchema.parse(newUserData);
-
-    await userRepo.save(returnNewUser as DeepPartial<User>);
 
     return returnNewUser;
   } else {
@@ -41,10 +40,10 @@ const updateUserService = async (
         ...(userData as DeepPartial<User>),
       });
 
+      await userRepo.save(newUserData as DeepPartial<User>);
+
       const returnNewUser: TuserCreationResponse =
         userCreationResponseSchema.parse(newUserData);
-
-      await userRepo.save(returnNewUser as DeepPartial<User>);
 
       return returnNewUser;
     } else {

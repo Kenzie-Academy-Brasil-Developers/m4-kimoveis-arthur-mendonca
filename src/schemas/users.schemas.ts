@@ -1,9 +1,9 @@
-import { z } from "zod";
+import { date, z } from "zod";
 
 const userCreationRequestSchema = z.object({
   name: z.string().max(45),
   email: z.string().email().max(45),
-  password: z.string().max(45),
+  password: z.string().max(120),
   admin: z.boolean().default(false),
 });
 
@@ -11,10 +11,10 @@ const userCreationResponseSchema = z.object({
   id: z.number(),
   name: z.string().max(45),
   email: z.string().email().max(45),
-  // admin: z.boolean(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-  deletedAt: z.string().nullable(),
+  admin: z.boolean().default(false),
+  createdAt: z.string().or(z.date()).nullish(),
+  updatedAt: z.string().or(z.date()).nullish(),
+  deletedAt: z.string().or(z.date()).nullish(),
 });
 
 const returnAllUsersResponseSchema = z.array(
@@ -22,10 +22,10 @@ const returnAllUsersResponseSchema = z.array(
     id: z.number(),
     name: z.string().max(45),
     email: z.string().email().max(45),
-    admin: z.boolean(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-    deletedAt: z.string().nullable(),
+    admin: z.boolean().default(false),
+    createdAt: z.string().or(z.date()).nullish(),
+    updatedAt: z.string().or(z.date()).nullish(),
+    deletedAt: z.string().or(z.date()).nullish(),
   })
 );
 
@@ -34,6 +34,7 @@ const userUpdateRequestSchema = userCreationResponseSchema
     deletedAt: true,
     createdAt: true,
     id: true,
+    admin: true,
   })
   .partial();
 

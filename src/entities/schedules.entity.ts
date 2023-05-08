@@ -8,7 +8,7 @@ class Schedule {
   id: string;
 
   @Column()
-  date: string | Date;
+  date: string;
 
   @Column()
   time: string;

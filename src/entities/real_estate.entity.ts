@@ -28,10 +28,10 @@ class RealEstate {
   size: number;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt: string;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt: string;
 
   @OneToOne(() => Address)
   @JoinColumn()

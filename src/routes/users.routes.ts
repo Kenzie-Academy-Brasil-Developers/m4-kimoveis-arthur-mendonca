@@ -6,7 +6,10 @@ import {
 } from "../controllers/users.controllers";
 import verifyUserEmailMiddleware from "../middlewares/verifyUserEmail.middleware";
 import checkIfBodyRequestIsValidMiddleware from "../middlewares/validateRequest.middleware";
-import { userCreationRequestSchema } from "../schemas/users.schemas";
+import {
+  userCreationRequestSchema,
+  userUpdateRequestSchema,
+} from "../schemas/users.schemas";
 import verifyTokenMiddleware from "../middlewares/verifyToken.middleware";
 import verifyIdMiddleware from "../middlewares/verifyId.middleware";
 
@@ -21,6 +24,7 @@ userRoutes.post(
 userRoutes.get("", verifyTokenMiddleware, listAllUsersController); // listar usuários -- APENAS ADMIN
 userRoutes.patch(
   "/:id",
+  checkIfBodyRequestIsValidMiddleware(userUpdateRequestSchema),
   verifyIdMiddleware,
   verifyTokenMiddleware,
   updateUserController
