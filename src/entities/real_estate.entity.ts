@@ -27,11 +27,11 @@ class RealEstate {
   @Column()
   size: number;
 
-  @CreateDateColumn()
-  createdAt: string;
+  @CreateDateColumn({ type: "date" })
+  createdAt: string | Date;
 
-  @UpdateDateColumn()
-  updatedAt: string;
+  @UpdateDateColumn({ type: "date" })
+  updatedAt: string | Date;
 
   @OneToOne(() => Address)
   @JoinColumn()
