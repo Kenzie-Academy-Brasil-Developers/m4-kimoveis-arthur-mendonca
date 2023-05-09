@@ -19,7 +19,7 @@ const verifyCategoryTokenMiddleware = async (
     if (error) throw new AppError(error.message, 401);
 
     response.locals.userId = decoded.sub;
-    response.locals.userIsAdmin = decoded.admin;
+    response.locals.admin = decoded.admin;
 
     return next();
   });

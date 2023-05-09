@@ -14,10 +14,6 @@ const updateUserService = async (
   userData: TUserUpdateRequestSchema,
   userIsAdmin: boolean
 ): Promise<TuserCreationResponse> => {
-  // console.log(idFromRequest);
-  // console.log(idFromToken);
-  // console.log(userIsAdmin);
-
   if (userIsAdmin) {
     const userRepo: Repository<User> = AppDataSource.getRepository(User);
     const currentUser: User | null = await userRepo.findOneBy({

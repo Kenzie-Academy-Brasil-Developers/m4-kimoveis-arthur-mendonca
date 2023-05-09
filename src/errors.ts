@@ -10,7 +10,7 @@ class AppError extends Error {
   }
 }
 
-const handleErrors = async(
+const handleErrors = async (
   err: Error,
   req: Request,
   res: Response,
@@ -28,7 +28,7 @@ const handleErrors = async(
     });
   }
 
-  console.log(err);
+  console.log(err.message);
 
   return res.status(500).json({
     message: "Internal server error",

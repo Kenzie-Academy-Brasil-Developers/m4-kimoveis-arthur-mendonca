@@ -8,7 +8,7 @@ const createCategoryController = async (
   response: Response
 ): Promise<Response> => {
   const categoryName = request.body;
-  const userIsAdmin = response.locals.userIsAdmin;
+  const userIsAdmin = response.locals.admin;
   const createCategory = await createCategoryService(categoryName, userIsAdmin);
 
   return response.status(201).json(createCategory);
