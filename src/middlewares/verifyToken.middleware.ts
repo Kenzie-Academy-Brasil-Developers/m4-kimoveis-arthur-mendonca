@@ -4,6 +4,7 @@ import { AppError } from "../errors";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { User } from "../entities";
+import "dotenv/config";
 
 const verifyTokenMiddleware = async (
   request: Request,

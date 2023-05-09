@@ -6,8 +6,12 @@ import { categoryCreationResponseSchema } from "../../schemas/categories.schema"
 import { AppError } from "../../errors";
 
 const createCategoryService = async (
-  name: string
+  name: string,
+  userIsAdmin: boolean
 ): Promise<TCategoryCreationResponseSchema> => {
+  if (!userIsAdmin) {
+    throw new AppError("Insufficient permission", 403);
+  }
   const categoryRepo: Repository<Category> =
     AppDataSource.getRepository(Category);
 

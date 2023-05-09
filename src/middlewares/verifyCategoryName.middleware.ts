@@ -3,6 +3,7 @@ import { Repository } from "typeorm";
 import { Category } from "../entities";
 import { AppDataSource } from "../data-source";
 import { AppError } from "../errors";
+
 const verifyCategoryNameMiddleware = async (
   request: Request,
   response: Response,
