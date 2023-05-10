@@ -15,7 +15,6 @@ const createRealEstateService = async (
   const { address, categoryId, ...realEstateData } = requestData;
 
   const addressRepo: Repository<Address> = AppDataSource.getRepository(Address);
-  // VERIFICAR SE O ADDRESS JÁ EXISTE
 
   const checkAddress: Address | null = await addressRepo.findOne({
     where: {

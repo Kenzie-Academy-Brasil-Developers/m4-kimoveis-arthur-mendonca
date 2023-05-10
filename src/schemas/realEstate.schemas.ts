@@ -15,6 +15,8 @@ const createRealEstateRequestSchema = z.object({
   address: addressSchema,
 });
 
+const listAllRealEstatesSchema = z.array(createRealEstateRequestSchema);
+
 const createRealEstateResponseSchema = z.object({
   id: z.number(),
   value: z.number().or(z.string()),
@@ -37,4 +39,5 @@ export {
   createRealEstateRequestSchema,
   createRealEstateResponseSchema,
   createRealEstateCreationSchema,
+  listAllRealEstatesSchema,
 };
