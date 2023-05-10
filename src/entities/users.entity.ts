@@ -12,6 +12,7 @@ import {
 } from "typeorm";
 import Schedules from "./schedules.entity";
 import { getRounds, hash, hashSync } from "bcryptjs";
+import Schedule from "./schedules.entity";
 
 @Entity("users")
 class User {
@@ -39,9 +40,9 @@ class User {
   @DeleteDateColumn({ type: "date" })
   deletedAt: string | Date;
 
-  @OneToMany(() => Schedules, (schedules) => schedules.user)
+  @OneToMany(() => Schedule, (schedule) => schedule.user)
   @JoinColumn()
-  schedules: Schedules[];
+  schedules: Schedule[];
 
   @BeforeInsert()
   @BeforeUpdate()

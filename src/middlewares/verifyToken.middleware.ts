@@ -33,22 +33,8 @@ const verifyTokenMiddleware = async (
     id: response.locals.id,
   });
 
-  // if (!getLoggedUser) {
-  //   throw new AppError("invalid signature", 401);
-  // }
-
-  // const admin = getLoggedUser!.admin;
-  // response.locals.admin = admin;
-
   const IdNumberFromUser = getLoggedUser!.id;
   response.locals.id = IdNumberFromUser;
-
-  // Se eu retirar as linhas 39,40, 42 e 43, os testes de UPDATE abaixo não passam. Por quê?
-  // Success: User must be able to self update - User token - Full body (102 ms)
-  // × Success: User must not be able to update 'admin' field - Admin token - Partial (16 ms)
-
-  // const activeUser = getLoggedUser.deletedAt;
-  // response.locals.activeUser = activeUser;
 
   return next();
 };

@@ -58,38 +58,7 @@ const createRealEstateService = async (
 
   await realEstateRepo.save(createNewRealEstate);
 
-  //   const { category, ...realEstateInfo } = createNewRealEstate;
-
-  //   const responseData = createRealEstateResponseSchema.parse({
-  //     ...realEstateInfo,
-  //     category: {
-  //       id: category.id,
-  //       name: category.name,
-  //     },
-  //   });
-
   return createNewRealEstate;
 };
 
 export default createRealEstateService;
-
-// status: 201,
-//       expectBody: { ...realEstateInfo, category },
-
-// Real_State_body
-// id: any;
-// value: number;
-// size: number;
-// createdAt: any;
-// updatedAt: any;
-
-// ADRESS
-// street: string;
-//     zipCode: string;
-//     city: string;
-//     state: string;
-
-// &
-
-// category: {
-//     name: string;
