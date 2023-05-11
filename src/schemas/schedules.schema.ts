@@ -1,7 +1,7 @@
 import z from "zod";
 
 const scheduleCreationSchema = z.object({
-  date: z.string().or(z.date()),
+  date: z.string(),
   hour: z.string(),
   realEstateId: z.number(),
 });
