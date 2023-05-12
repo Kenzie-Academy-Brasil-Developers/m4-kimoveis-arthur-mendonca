@@ -6,11 +6,14 @@ import {
 } from "../controllers/categories.controllers";
 import verifyCategoryNameMiddleware from "../middlewares/verifyCategoryName.middleware";
 import verifyCategoryTokenMiddleware from "../middlewares/verifyCategoryToken.middleware";
+import checkIfBodyRequestIsValidMiddleware from "../middlewares/validateRequest.middleware";
+import { categoryCreationRequestSchema } from "../schemas/categories.schema";
 
 const categoriesRoutes: Router = Router();
 
 categoriesRoutes.post(
   "",
+  checkIfBodyRequestIsValidMiddleware(categoryCreationRequestSchema),
   verifyCategoryNameMiddleware,
   verifyCategoryTokenMiddleware,
   createCategoryController

@@ -6,7 +6,7 @@ const verifyWeekdayMiddleware = async (
   request: Request,
   response: Response,
   next: NextFunction
-): Promise<Response | void> => {
+): Promise<void> => {
   const scheduleBodyRequest: TScheduleCreation = request.body;
   const { date } = scheduleBodyRequest;
 

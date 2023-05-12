@@ -1,17 +1,13 @@
 import { DeepPartial, Repository } from "typeorm";
 import { RealEstate, Schedule, User } from "../../entities";
 import { AppDataSource } from "../../data-source";
-import {
-  TScheduleCreation,
-  TScheduleCreationResponse,
-} from "../../interfaces/schedules.interface";
-import { scheduleResponseSchema } from "../../schemas/schedules.schema";
+import { TScheduleCreation } from "../../interfaces/schedules.interface";
 import { AppError } from "../../errors";
 
 const createSchedulesService = async (
   scheduleData: TScheduleCreation,
   userId: number
-): Promise<any> => {
+): Promise<object> => {
   const { realEstateId, date, hour } = scheduleData;
   const scheduleRepo: Repository<Schedule> =
     AppDataSource.getRepository(Schedule);

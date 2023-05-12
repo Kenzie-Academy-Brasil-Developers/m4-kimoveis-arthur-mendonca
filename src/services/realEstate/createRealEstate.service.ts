@@ -1,17 +1,13 @@
-import { DeepPartial, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { Address, Category, RealEstate } from "../../entities";
 import { AppDataSource } from "../../data-source";
-import {
-  TCreateRealEstateCreation,
-  TCreateRealEstateRequest,
-  TCreateRealEstateResponse,
-} from "../../interfaces/realEstate.interfaces";
-import { createRealEstateResponseSchema } from "../../schemas/realEstate.schemas";
+import { TCreateRealEstateRequest } from "../../interfaces/realEstate.interfaces";
+
 import { AppError } from "../../errors";
 
 const createRealEstateService = async (
   requestData: TCreateRealEstateRequest
-): Promise<any> => {
+): Promise<RealEstate> => {
   const { address, categoryId, ...realEstateData } = requestData;
 
   const addressRepo: Repository<Address> = AppDataSource.getRepository(Address);

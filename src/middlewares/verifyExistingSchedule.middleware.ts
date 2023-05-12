@@ -16,16 +16,12 @@ const verifyExistingScheduleMiddleware = async (
   const scheduleRepo: Repository<Schedule> =
     AppDataSource.getRepository(Schedule);
 
-  console.log(scheduleRepo);
-
   const existingSchedule = await scheduleRepo
     .createQueryBuilder("schedule")
     .where("schedule.date = :date", { date })
     .andWhere("schedule.hour = :hour", { hour })
     .andWhere("schedule.realEstateId = :realEstateId", { realEstateId })
     .getOne();
-
-  console.log(existingSchedule);
 
   if (existingSchedule) {
     throw new AppError(

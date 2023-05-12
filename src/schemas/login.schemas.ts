@@ -7,4 +7,9 @@ const getLoggedUserSchema = z.object({
   password: z.string(),
 });
 
-export { getLoggedUserSchema };
+const loginRequestSchema = getLoggedUserSchema.pick({
+  email: true,
+  password: true,
+});
+
+export { getLoggedUserSchema, loginRequestSchema };

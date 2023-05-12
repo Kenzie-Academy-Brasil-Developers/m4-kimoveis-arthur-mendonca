@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { TuserCreationDataInterface } from "../interfaces/users.interfaces";
 import { createUserService } from "../services/users/createUser.service";
 import { listAllUsersService } from "../services/users/listAllUsers.service";

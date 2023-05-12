@@ -1,7 +1,6 @@
 import { Repository } from "typeorm";
-import { Address, RealEstate } from "../../entities";
+import { RealEstate } from "../../entities";
 import { AppDataSource } from "../../data-source";
-import { listAllRealEstatesSchema } from "../../schemas/realEstate.schemas";
 
 const listAllRealEstateService = async (): Promise<RealEstate[]> => {
   const realEstateRepo: Repository<RealEstate> =

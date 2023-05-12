@@ -1,7 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { Repository } from "typeorm";
-import { User } from "../entities";
-import { AppDataSource } from "../data-source";
 import { AppError } from "../errors";
 
 const verifyAdminUserMiddleware = async (
@@ -10,7 +7,6 @@ const verifyAdminUserMiddleware = async (
   next: NextFunction
 ) => {
   const userIsAdmin = res.locals.admin;
-  console.log(userIsAdmin);
   if (!userIsAdmin) {
     throw new AppError("Insufficient permission", 403);
   }

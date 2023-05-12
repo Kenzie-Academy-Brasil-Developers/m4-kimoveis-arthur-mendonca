@@ -8,7 +8,7 @@ const verifyUserEmailMiddleware = async (
   request: Request,
   response: Response,
   next: NextFunction
-) => {
+): Promise<void | Response> => {
   const user: TuserCreationDataInterface = request.body;
 
   const userRepo: Repository<User> = AppDataSource.getRepository(User);

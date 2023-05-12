@@ -8,7 +8,7 @@ const verifyIdMiddleware = async (
   request: Request,
   response: Response,
   next: NextFunction
-) => {
+): Promise<void> => {
   const userId = request.params.id;
 
   const userRepo: Repository<User> = AppDataSource.getRepository(User);

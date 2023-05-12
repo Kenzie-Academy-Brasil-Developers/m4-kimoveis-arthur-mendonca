@@ -1,4 +1,4 @@
-import { date, z } from "zod";
+import { z } from "zod";
 
 const userCreationRequestSchema = z.object({
   name: z.string().max(45),

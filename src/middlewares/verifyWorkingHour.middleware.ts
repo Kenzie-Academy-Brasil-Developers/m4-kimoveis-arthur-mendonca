@@ -2,11 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import { TScheduleCreation } from "../interfaces/schedules.interface";
 import { AppError } from "../errors";
 
-const verifyWorkingHourMiddleware = (
+const verifyWorkingHourMiddleware = async (
   request: Request,
   response: Response,
   next: NextFunction
-) => {
+): Promise<void> => {
   const requestBody: TScheduleCreation = request.body;
   const { hour } = requestBody;
   const [hourNumber, hourMinute] = hour.split(":");

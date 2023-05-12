@@ -6,19 +6,19 @@ class Address {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column({ length: 45 })
+  @Column({ length: 45, type: "varchar" })
   street: string;
 
-  @Column({ length: 45 })
+  @Column({ length: 45, type: "varchar" })
   zipCode: string;
 
-  @Column({ length: 7 })
-  number: string;
+  @Column({ length: 7, nullable: true, type: "varchar" })
+  number: string | null | undefined;
 
   @Column({ length: 20 })
   city: string;
 
-  @Column({ length: 2 })
+  @Column({ length: 2, type: "varchar" })
   state: string;
 
   @OneToOne(() => RealEstate)
